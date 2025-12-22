@@ -10,4 +10,8 @@ on:
       - synchronize
 jobs:
   pr-weasel:
-    uses: codingjoe/word-weasel/.github/workflows/pull-request.yml@main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: codingjoe/word-weasel@main
+        with:
+          text: ${{ github.event.pull_request.title }} ${{ github.event.pull_request.body }}

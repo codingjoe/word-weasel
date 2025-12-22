@@ -20,6 +20,10 @@ on:
       # Optional, if you want to include the check in branch protection rules
       # - synchronize
 jobs:
-  pr-weasel:
-    uses: codingjoe/word-weasel/.github/workflows/pull-request.yml@main
+  weasel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: codingjoe/word-weasel@v1
+        with:
+          text: ${{ github.event.pull_request.title }} ${{ github.event.pull_request.body }}
 ```

@@ -1,0 +1,67 @@
+name: 'Word Weasel'
+branding:
+  icon: book-open
+  color: gray-dark
+description: 'Lints text for vague or ambiguous words'
+inputs:
+  text:
+    description: 'Text to lint for ambiguous words'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        # Lint PR title and description for ambiguous words
+        EXIT_CODE=0
+        for WORD in $(yq -r '.[]' <<<"$WORDLIST")
+          do
+          if [[ "$TEXT" =~ (^|[^a-zA-Z])"$WORD"([^a-zA-Z]|$) ]]
+          then
+            echo "::error::'$WORD' is too vague or ambiguous. Please rephrase."
+            echo -e "> [!CAUTION] \n> '$WORD' is too vague or ambiguous. Please rephrase.\n\n" >> $GITHUB_STEP_SUMMARY
+            export EXIT_CODE=1
+          fi
+        done
+        exit $EXIT_CODE
+      shell: bash
+      env:
+        TEXT: ${{ inputs.text }}
+        WORDLIST: |
+          - amend
+          - clean
+          - clearly
+          - completely
+          - correct
+          - enhance
+          - exceedingly
+          - excellent
+          - extremely
+          - fairly
+          - few
+          - huge
+          - improve
+          - interestingly
+          - largely
+          - many
+          - modernize
+          - mostly
+          - obviously
+          - optimize
+          - polish
+          - proper
+          - quite
+          - refactor
+          - relatively
+          - remarkably
+          - revise
+          - rework
+          - several
+          - significantly
+          - streamline
+          - substantially
+          - surprisingly
+          - tidy
+          - tiny
+          - various
+          - vast
+          - very
