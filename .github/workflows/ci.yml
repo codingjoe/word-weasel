@@ -1,0 +1,13 @@
+# .github/workflows/pull-request.yml
+# Write better PRs and commit messages
+name: "Word Weasel"
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+jobs:
+  pr-weasel:
+    uses: codingjoe/word-weasel/.github/workflows/pull-request.yml@main
