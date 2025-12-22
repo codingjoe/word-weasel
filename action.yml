@@ -2,7 +2,7 @@ name: 'Word Weasel'
 branding:
   icon: book-open
   color: gray-dark
-description: 'Greet someone'
+description: 'Lints text for vague or ambiguous words'
 inputs:
   text:
     description: 'Text to lint for ambiguous words'
