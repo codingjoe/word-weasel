@@ -14,7 +14,7 @@ jobs:
           # Lint PR title and description for ambiguous words
           EXIT_CODE=0
           DESCRIPTION=$(cat '${{ github.event_path }}' | jq -r '.pull_request.title, .pull_request.body')
-          for WORD in $(yq -r '.[]' weasel.yml)
+          for WORD in $(yq -r '.[]' <<<"$WORDLIST")
             do
             if [[ "$DESCRIPTION" =~ (^|[^a-zA-Z])"$WORD"([^a-zA-Z]|$) ]]
             then
@@ -25,3 +25,43 @@ jobs:
           done
           exit $EXIT_CODE
         shell: bash
+        env:
+          WORDLIST: |
+            - amend
+            - clean
+            - clearly
+            - completely
+            - correct
+            - enhance
+            - exceedingly
+            - excellent
+            - extremely
+            - fairly
+            - few
+            - huge
+            - improve
+            - interestingly
+            - largely
+            - many
+            - modernize
+            - mostly
+            - obviously
+            - optimize
+            - polish
+            - proper
+            - quite
+            - refactor
+            - relatively
+            - remarkably
+            - revise
+            - rework
+            - several
+            - significantly
+            - streamline
+            - substantially
+            - surprisingly
+            - tidy
+            - tiny
+            - various
+            - vast
+            - very
