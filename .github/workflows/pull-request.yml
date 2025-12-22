@@ -4,7 +4,7 @@ on:
   workflow_call:
 jobs:
   pr-weasel:
-    name: "PR title and description"
+    name: "PR title & description"
     runs-on: ubuntu-latest
     timeout-minutes: 1
     if: ${{ github.actor != 'dependabot[bot]' }}
