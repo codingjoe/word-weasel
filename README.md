@@ -20,10 +20,22 @@ on:
       # Optional, if you want to include the check in branch protection rules
       # - synchronize
 jobs:
-  weasel:
+  pr-title:
+    name: "PR Title"
     runs-on: ubuntu-latest
+    timeout-minutes: 1
+    if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
       - uses: codingjoe/word-weasel@v1
         with:
-          text: ${{ github.event.pull_request.title }} ${{ github.event.pull_request.body }}
+          text: ${{ github.event.pull_request.title }}
+  pr-body:
+    name: "PR Body"
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    steps:
+      - uses: codingjoe/word-weasel@v1
+        with:
+          text: ${{ github.event.pull_request.body }}
 ```
